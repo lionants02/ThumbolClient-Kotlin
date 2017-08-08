@@ -15,4 +15,7 @@ class ThumbolClient {
     fun getImage(filter: String,part_file: String){
 
     }
+    private fun imageDownload(urlpart :String){
+
+    }
 }
