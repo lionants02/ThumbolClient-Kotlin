@@ -25,12 +25,21 @@ class ThumbolClient {
     fun getImage(filter: String,part_file: String){
 
     }
-    private fun download(urlpart :String){
+
+
+
+
+
+
+    private fun download(urlpart :String):ByteArray?{
+
+        var data:ByteArray? = null
+
         testurl.httpGet().timeout(timeout).timeoutRead(readTimeout).response { request, response, result ->
-
-
+            if (response.httpStatusCode==200){
+                data=result.get()
+            }
         }
-
-
+        return data
     }
 }
