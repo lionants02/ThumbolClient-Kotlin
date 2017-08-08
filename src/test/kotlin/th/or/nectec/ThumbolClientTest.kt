@@ -7,13 +7,16 @@ import org.junit.Before
 import java.util.concurrent.CountDownLatch
 
 class ThumbolClientTest {
-    val clientTest1 :ThumbolClient = ThumbolClient()
+    val clientTest1 :ThumbolClient = ThumbolClient().apply { brightness=100
+    }
 
 
     val timeout = 5000 // 5000 milliseconds = 5 seconds.
     val readTimeout = 9000 // 9000 milliseconds = 9 seconds.
 
     val testurl :String ="http://localhost:8000/unsafe/trim/fit-in/500x500/filters:blur(7):brightness(40)/1.jpg"
+
+
 
 
     @Test fun testDownload(){
