@@ -10,7 +10,7 @@ class ThumbolURL(// = "http://localhost:8000"
 
     //http://localhost:8000/unsafe/trim/fit-in/500x500/filters:blur(7,0):brightness(10)/1.jpg
 
-    var hmac_keyAUTH: String? = null
+    var hmac_auth: String? = null
     var background_color: String? = null
     var blur: Int = 0
     var blur_sigma: Int = 0
@@ -69,15 +69,15 @@ class ThumbolURL(// = "http://localhost:8000"
     }*/
 
     private fun hmac_keyAUTHFilter(): String {
-        return if (hmac_keyAUTH != null) {
-            "/" + hmac_keyAUTH.toString()
+        return if (hmac_auth != null) {
+            "/" + hmac_auth
         } else "/unsafe"
     }
 
 
     private fun backgroundColorFilter(): String {
         return if (background_color != null) {
-            ":background_color(" + background_color.toString() + ")"
+            ":background_color(" + background_color + ")"
         } else ""
     }
 
