@@ -3,11 +3,9 @@ package th.or.nectec
 import com.github.kittinunf.fuel.httpGet
 import org.junit.Assert
 import org.junit.Test
-import org.junit.Before
-import java.util.concurrent.CountDownLatch
 
 class ThumbolClientTest {
-    val clientTest1 :ThumbolClient = ThumbolClient().apply { brightness=100
+    val clientTest1 : ThumbolURL = ThumbolURL().apply { brightness=100
     }
 
 
