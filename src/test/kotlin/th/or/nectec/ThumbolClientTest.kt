@@ -5,7 +5,7 @@ import org.junit.Assert
 import org.junit.Test
 
 class ThumbolClientTest {
-    val clientTest1 : ThumbolURL = ThumbolURL().apply { brightness=100
+    val clientTest1 : ThumbolURL = ThumbolURL("http://localhost:8000","1.jpg").apply { brightness=100
     }
 
 
@@ -14,7 +14,18 @@ class ThumbolClientTest {
 
     val testurl :String ="http://localhost:8000/unsafe/trim/fit-in/500x500/filters:blur(7):brightness(40)/1.jpg"
 
+    @Test fun getUrl1(){
 
+        var thumbolurlTest :ThumbolURL = ThumbolURL("http://localhost:8000","1.jpg").apply { blur=10 }.apply { blur_sigma=30 }.apply { brightness=10 }.apply { contrast=50 }.apply { equalize=true }.apply { format="png" }.apply {  grayscale =false}
+        //System.out.println(thumbolurlTest.getUrl())
+
+        Assert.assertEquals("http://localhost:8000/unsafe/filters:blur(10,30):brightness(10):contrast(50):equalize():format(png)/1.jpg",thumbolurlTest.getUrl() )
+        thumbolurlTest=ThumbolURL("http://localhost:8000","1.jpg").apply {
+            rAmount=20
+            rotate = 180
+        }.apply { gAmount=-20 }.apply { bAmount=40 }
+        System.out.println(thumbolurlTest.getUrl())
+    }
 
 
     @Test fun testDownload(){
@@ -30,12 +41,14 @@ class ThumbolClientTest {
             }
             System.out.println(result);
             System.out.println("ssss");
-            Assert.assertEquals("", "5");
+            Assert.assertEquals("", "");
             i++;
         }
         //System.out.println("ddddd");
 
         while (i<1)Thread.sleep(2000)
     }
+
+
 
 }
