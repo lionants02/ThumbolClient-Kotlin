@@ -4,7 +4,7 @@ import com.github.kittinunf.fuel.httpGet
 import org.junit.Assert
 import org.junit.Test
 
-class ThumbolClientTest {
+class ThumbolURLTest {
     val clientTest1: ThumbolURL = ThumbolURL("http://localhost:8000", "1.jpg").apply {
         brightness = 100
     }
@@ -12,7 +12,7 @@ class ThumbolClientTest {
 
     val testurl: String = "http://localhost:8000/unsafe/trim/fit-in/500x500/filters:blur(7):brightness(40)/1.jpg"
 
-    @Test fun getUrl1() {
+    @Test fun createUrl() {
 
         var thumbolurlTest: ThumbolURL = ThumbolURL("http://localhost:8000", "1.jpg").
                 apply {
@@ -24,7 +24,8 @@ class ThumbolClientTest {
                     format = "png"
                     grayscale = false
                 }
-        Assert.assertEquals("http://localhost:8000/unsafe/filters:blur(10,30):brightness(10):contrast(50):equalize():format(png)/1.jpg", thumbolurlTest.getUrl())
+        Assert.assertEquals("http://localhost:8000/unsafe/filters:blur(10,30):brightness(10):contrast(50):equalize():format(png)/1.jpg", thumbolurlTest.createUrl())
+        System.out.println(thumbolurlTest.createUrl())
 
         thumbolurlTest = ThumbolURL("http://localhost:8000", "1.jpg").apply {
             rgb_amount.rAmount = 20
@@ -35,17 +36,19 @@ class ThumbolClientTest {
             no_upscale = true
             noise=50
         }
-        //System.out.println(thumbolurlTest.getUrl())
-        Assert.assertEquals("http://localhost:8000/unsafe/filters:max_bytes(102400):no_upscale():noise(50):rgb(20,-20,40):rotate(180)/1.jpg", thumbolurlTest.getUrl())
+        Assert.assertEquals("http://localhost:8000/unsafe/filters:max_bytes(102400):no_upscale():noise(50):rgb(20,-20,40):rotate(180)/1.jpg", thumbolurlTest.createUrl())
+        System.out.println(thumbolurlTest.createUrl())
+
         thumbolurlTest = ThumbolURL("http://localhost:8000", "1.jpg").apply {
             quality=10
             strip_icc = true
         }
-        System.out.println(thumbolurlTest.getUrl())
+        Assert.assertEquals("http://localhost:8000/unsafe/filters:quality(10):strip_icc()/1.jpg", thumbolurlTest.createUrl())
+        System.out.println(thumbolurlTest.createUrl())
     }
 
 
-    @Test fun testDownload() {
+   /* @Test fun testDownload() {
 
         var i = 0
 
@@ -64,7 +67,7 @@ class ThumbolClientTest {
         //System.out.println("ddddd");
 
         while (i < 1) Thread.sleep(2000)
-    }
+    }*/
 
 
 }

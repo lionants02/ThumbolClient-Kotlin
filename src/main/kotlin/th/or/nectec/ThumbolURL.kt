@@ -30,7 +30,7 @@ class ThumbolURL(// = "http://localhost:8000"
 
 
 
-    fun getUrl(): String {
+    fun createUrl(): String {
         var genurl = hosturl
         genurl += hmac_AuthFilter()
         genurl += addFilter()
@@ -66,7 +66,7 @@ class ThumbolURL(// = "http://localhost:8000"
 
     private fun backgroundColorFilter(): String {
         return if (background_color != null) {
-            ":background_color(" + background_color + ")"
+            ":background_color($background_color)"
         } else ""
     }
 
@@ -80,13 +80,13 @@ class ThumbolURL(// = "http://localhost:8000"
 
     private fun brightnessFilter(): String {
         return if (brightness != 0) {
-            ":brightness(" + brightness + ")"
+            ":brightness($brightness)"
         } else ""
     }
 
     private fun contrastFilter(): String {
         return if (contrast != 0) {
-            ":contrast(" + contrast + ")"
+            ":contrast($contrast)"
         } else ""
     }
 
@@ -99,7 +99,7 @@ class ThumbolURL(// = "http://localhost:8000"
 
     private fun formatFilter(): String {
         return if (format != null) {
-            ":format(" + format + ")"
+            ":format($format)"
         } else ""
     }
 
@@ -118,12 +118,12 @@ class ThumbolURL(// = "http://localhost:8000"
 
     private fun rotateFilter(): String {
         return if (rotate != 0) {
-            ":rotate(" + rotate + ")"
+            ":rotate($rotate)"
         } else ""
     }
     private fun maxBytesFilter(): String {
         return if (max_bytes != null) {
-            ":max_bytes(" + max_bytes + ")"
+            ":max_bytes($max_bytes)"
         } else ""
     }
 
@@ -136,14 +136,14 @@ class ThumbolURL(// = "http://localhost:8000"
 
     private fun noiseFilter(): String {
         return if (noise != 0) {
-            ":noise(" + noise + ")"
+            ":noise($noise)"
         } else ""
     }
 
 
     private fun qualityFilter(): String {
         return if (quality != null) {
-            ":quality(" + quality + ")"
+            ":quality($quality)"
         } else ""
     }
 
