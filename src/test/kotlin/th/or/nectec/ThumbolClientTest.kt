@@ -10,9 +10,6 @@ class ThumbolClientTest {
     }
 
 
-    val timeout = 5000 // 5000 milliseconds = 5 seconds.
-    val readTimeout = 9000 // 9000 milliseconds = 9 seconds.
-
     val testurl: String = "http://localhost:8000/unsafe/trim/fit-in/500x500/filters:blur(7):brightness(40)/1.jpg"
 
     @Test fun getUrl1() {
@@ -30,10 +27,19 @@ class ThumbolClientTest {
         Assert.assertEquals("http://localhost:8000/unsafe/filters:blur(10,30):brightness(10):contrast(50):equalize():format(png)/1.jpg", thumbolurlTest.getUrl())
 
         thumbolurlTest = ThumbolURL("http://localhost:8000", "1.jpg").apply {
-            rAmount = 20
-            gAmount = -20
-            bAmount = 40
+            rgb_amount.rAmount = 20
+            rgb_amount.gAmount = -20
+            rgb_amount.bAmount = 40
             rotate = 180
+            max_bytes = 102400
+            no_upscale = true
+            noise=50
+        }
+        //System.out.println(thumbolurlTest.getUrl())
+        Assert.assertEquals("http://localhost:8000/unsafe/filters:max_bytes(102400):no_upscale():noise(50):rgb(20,-20,40):rotate(180)/1.jpg", thumbolurlTest.getUrl())
+        thumbolurlTest = ThumbolURL("http://localhost:8000", "1.jpg").apply {
+            quality=10
+            strip_icc = true
         }
         System.out.println(thumbolurlTest.getUrl())
     }

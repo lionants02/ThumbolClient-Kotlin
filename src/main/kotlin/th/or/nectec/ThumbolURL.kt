@@ -19,21 +19,22 @@ class ThumbolURL(// = "http://localhost:8000"
     var equalize: Boolean = false
     var format: String? = null
     var grayscale: Boolean = false
-    var rAmount: Int = 0
-    var gAmount: Int = 0
-    var bAmount: Int = 0
+    var rgb_amount: RGB_Amount = RGB_Amount()
     var rotate: Int = 0
     var strip_icc: Boolean = false
     var max_bytes: Long? = null
     var no_upscale: Boolean = false
     var noise: Int = 0
     var quality: Int? = null
+    var watermark :Watermark = Watermark()
+
+
 
     fun getUrl(): String {
         var genurl = hosturl
-        genurl += hmac_keyAUTHFilter()
+        genurl += hmac_AuthFilter()
         genurl += addFilter()
-        genurl += addFilename()
+        genurl += "/" + imagename
         return genurl
     }
 
@@ -56,19 +57,7 @@ class ThumbolURL(// = "http://localhost:8000"
         return if (!filter.endsWith("/filters")) filter else ""
     }
 
-
-    /*
-     private fun $1Filter\(\) {
-          genurl+=if\($1!=null\) { $1.toString\(\) }else ""
-      }
-  
-    
-     */
-    /*private fun checkAddFilter(): String {
-        return if (!genurl.contains("/filters")) "/filters" else ""
-    }*/
-
-    private fun hmac_keyAUTHFilter(): String {
+    private fun hmac_AuthFilter(): String {
         return if (hmac_auth != null) {
             "/" + hmac_auth
         } else "/unsafe"
@@ -121,8 +110,8 @@ class ThumbolURL(// = "http://localhost:8000"
     }
 
     private fun rgbAmountFilter(): String {
-        return if ((rAmount or gAmount or bAmount) != 0) {
-            ":rgb(" + rAmount + "," + gAmount + "," + bAmount + ")"
+        return if ((rgb_amount.rAmount or rgb_amount.gAmount or rgb_amount.bAmount) != 0) {
+            ":rgb(" + rgb_amount.rAmount + "," + rgb_amount.gAmount + "," + rgb_amount.bAmount + ")"
         } else ""
     }
 
@@ -132,9 +121,6 @@ class ThumbolURL(// = "http://localhost:8000"
             ":rotate(" + rotate + ")"
         } else ""
     }
-
-    /////////////////////////////////---------------
-
     private fun maxBytesFilter(): String {
         return if (max_bytes != null) {
             ":max_bytes(" + max_bytes + ")"
@@ -161,21 +147,25 @@ class ThumbolURL(// = "http://localhost:8000"
         } else ""
     }
 
-
-
-
     private fun stripIccFilter(): String {
         return if (strip_icc) {
             ":strip_icc()"
         } else ""
     }
 
-    //----------
-    private fun addFilename(): String {
-        return "/" + imagename
+    class Filters
+
+    class Watermark{
+        var imageurl :String=""
+        var x :Int =-10
+        var y :Int =-10
+        var alpha :Int =50
     }
-
-
+    class RGB_Amount {
+        var rAmount: Int = 0
+        var gAmount: Int = 0
+        var bAmount: Int = 0
+    }
 }
 
 
