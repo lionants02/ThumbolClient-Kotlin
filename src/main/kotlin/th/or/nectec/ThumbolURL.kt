@@ -26,8 +26,7 @@ class ThumbolURL(// = "http://localhost:8000"
     var no_upscale: Boolean = false
     var noise: Int = 0
     var quality: Int? = null
-    var watermark :Watermark = Watermark()
-
+    var watermark: Watermark = Watermark()
 
 
     fun createUrl(): String {
@@ -58,9 +57,7 @@ class ThumbolURL(// = "http://localhost:8000"
     }
 
     private fun hmac_AuthFilter(): String {
-        return if (hmac_auth != null) {
-            "/" + hmac_auth
-        } else "/unsafe"
+        return if (hmac_auth != null) "/" + hmac_auth else "/unsafe"
     }
 
 
@@ -121,6 +118,7 @@ class ThumbolURL(// = "http://localhost:8000"
             ":rotate($rotate)"
         } else ""
     }
+
     private fun maxBytesFilter(): String {
         return if (max_bytes != null) {
             ":max_bytes($max_bytes)"
@@ -155,12 +153,13 @@ class ThumbolURL(// = "http://localhost:8000"
 
     class Filters
 
-    class Watermark{
-        var imageurl :String=""
-        var x :Int =-10
-        var y :Int =-10
-        var alpha :Int =50
+    class Watermark {
+        var imageurl: String = ""
+        var x: Int = -10
+        var y: Int = -10
+        var alpha: Int = 50
     }
+
     class RGB_Amount {
         var rAmount: Int = 0
         var gAmount: Int = 0
